@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 /**
-*main -  function that prints all natural numbers from n to 98
+*main -  prints even valued fibonacci numbers upto 4000000 
 *Return: Always 0
 */
 int main(void)
