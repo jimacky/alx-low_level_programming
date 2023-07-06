@@ -1,31 +1,42 @@
 #include "main.h"
-#include <stdio.h>
 /**
-*_strlen_recursion - return the length of a string
-*@s: string
-*Return: the lengthof a string
+*last_index - shows the index
+*@s: string pointer
+*Return: integer
 */
-int _strlen_recursion(char *s)
+int is_palindrome(char *s);
+int check(char *s, int vstart, int vend, int pair);
+int last_index(char *s)
 {
-if (*s == '\0')
+int n = 0;
+if (*s > '\0')
+n += last_index(s + 1) + 1;
+return (n);
+}
+/**
+*is_palindrome - check if a string is palindrome
+*@s: string pointer
+*Return: 0 or 1
+*/
+int is_palindrome(char *s)
+{
+int vend = last_index(s);
+return (check(s, 0, vend - 1, vend % 2));
+}
+/**
+*check - checker for the palindrome
+*@s: string pointer
+*@vstart: integer moving
+*@vend: integer moves
+*@pair: integer
+*Return: 0 or 1
+*/
+int check(char *s, int vstart, int vend, int pair)
+{
+if ((vstart == vend && pair != 0) || (vstart == vend + 1 && pair == 0))
+return (1);
+if (s[vstart] != s[vend])
 return (0);
 else
-return (1 + _strlen_recursion(s + 1));
-}
-/**
-*comparator - compares each character of the string
-*@s: string
-@n1: smallest iterator
-@n2: biggest iterator
-*Return: .
-*/
-int comparator(char *s, int n1, int n2)
-{
-if (*(s + n1) == *(s + n2))
-{
-if (n1 == n2 || n1 == n2 + 1)
-return (1);
-return (0 + comparator(s, n1 + 1, n2 - 1));
-}
-return (0);
+return (check(s, vstart + 1, vend - 1, pair));
 }
